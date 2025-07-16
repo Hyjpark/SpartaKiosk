@@ -7,6 +7,11 @@ import java.util.Scanner;
 public class Kiosk {
     List<MenuItem> menuItems = new ArrayList<>();
 
+    Kiosk(List<List<String>> menuList) {
+        for (List<String> menu : menuList) {
+            menuItems.add(new MenuItem(menu.get(0), menu.get(1), menu.get(2)));
+        }
+    }
 
     public void start() {
         StringBuilder sb = new StringBuilder();
