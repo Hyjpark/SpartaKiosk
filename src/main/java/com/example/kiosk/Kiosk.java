@@ -1,6 +1,7 @@
 package com.example.kiosk;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,19 +31,28 @@ public class Kiosk {
         Scanner sc =  new Scanner(System.in);
         boolean run = true;
         while (run) {
-            System.out.println(sb.toString());
+            try {
+                System.out.println(sb.toString());
 
-            int selectMenu = sc.nextInt();
-            int menuIndex = selectMenu - 1;
-            switch (selectMenu) {
-                case 0:
-                    System.out.println("프로그램을 종료합니다.");
-                    run = false;
-                    break;
-                case 1: case 2: case 3: case 4:
-                    System.out.print("선택한 메뉴 : ");
-                    System.out.println(menuItems.get(menuIndex).name + " | W " + menuItems.get(menuIndex).price + " | " + menuItems.get(menuIndex).description);
-                    break;
+                int selectMenu = sc.nextInt();
+                int menuIndex = selectMenu - 1;
+                switch (selectMenu) {
+                    case 0:
+                        System.out.println("프로그램을 종료합니다.");
+                        run = false;
+                        break;
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                        System.out.print("선택한 메뉴 : ");
+                        System.out.println(menuItems.get(menuIndex).name + " | W " + menuItems.get(menuIndex).price + " | " + menuItems.get(menuIndex).description);
+                        break;
+                    default:
+                        throw new InputMismatchException("존재하지 않는 메뉴입니다.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("존재하지 않는 메뉴입니다.");
             }
         }
     }
