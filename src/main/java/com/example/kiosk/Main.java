@@ -2,6 +2,7 @@ package com.example.kiosk;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,6 +25,23 @@ public class Main {
         }
         sb.append("0. 종료 \t| 종료");
 
-        System.out.println(sb.toString());
+        Scanner sc =  new Scanner(System.in);
+        boolean run = true;
+        while (run) {
+            System.out.println(sb.toString()); // 메뉴 출력
+
+            int selectMenu = sc.nextInt();
+            int menuIndex = selectMenu - 1;
+            switch (selectMenu) {
+                case 0:
+                    System.out.println("프로그램을 종료합니다.");
+                    run = false;
+                    break;
+                case 1: case 2: case 3: case 4:
+                    System.out.print("선택한 메뉴 : ");
+                    System.out.println(menuItems.get(menuIndex).name + " | W " + menuItems.get(menuIndex).price + " | " + menuItems.get(menuIndex).description);
+                    break;
+            }
+        }
     }
 }
