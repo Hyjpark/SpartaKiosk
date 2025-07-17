@@ -24,7 +24,7 @@ public class Menu {
             sb.append(menuItems.get(i).description);
             sb.append("\n");
         }
-        sb.append("0. 종료 \t| 종료");// 메뉴 출력
+        sb.append("0. 뒤로가기");// 메뉴 출력
 
         System.out.println(sb.toString());
     }
