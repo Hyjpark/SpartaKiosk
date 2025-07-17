@@ -49,9 +49,9 @@ public class Kiosk {
                         case 3:
                         case 4:
                             System.out.print("선택한 메뉴 : ");
-                            System.out.println(menu.menuItems.get(menuIndex).name + " | W "
-                                    + menu.menuItems.get(menuIndex).price
-                                    + " | " + menu.menuItems.get(menuIndex).description);
+                            System.out.println(menu.getMenuItems().get(menuIndex).name + " | W "
+                                    + menu.getMenuItems().get(menuIndex).price
+                                    + " | " + menu.getMenuItems().get(menuIndex).description);
                             break;
                         default:
                             throw new InputMismatchException("존재하지 않는 메뉴입니다.");

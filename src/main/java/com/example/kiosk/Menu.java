@@ -29,6 +29,10 @@ public class Menu {
         System.out.println(sb.toString());
     }
 
+    public List<MenuItem> getMenuItems() {
+        return menuItems;
+    }
+
     public String getCategory() {
         return this.category;
     }
