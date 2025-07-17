@@ -20,7 +20,7 @@ public class Kiosk {
                 // 상위 카테고리 메뉴 출력
                 System.out.println("\n[ MAIN MENU ]");
                 for (int i = 0; i < menus.size(); i++) {
-                    System.out.println((i + 1) + ". " + menus.get(i).category);
+                    System.out.println((i + 1) + ". " + menus.get(i).getCategory());
                 }
                 System.out.println("0. 종료 \t| 종료");
 

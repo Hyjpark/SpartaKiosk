@@ -29,4 +29,7 @@ public class Menu {
         System.out.println(sb.toString());
     }
 
+    public String getCategory() {
+        return this.category;
+    }
 }
