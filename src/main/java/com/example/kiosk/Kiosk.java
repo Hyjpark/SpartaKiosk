@@ -1,9 +1,6 @@
 package com.example.kiosk;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Kiosk {
     private List<Menu> menus = new ArrayList<>();
@@ -31,8 +28,11 @@ public class Kiosk {
                         System.out.println("프로그램을 종료합니다.");
                         run = false;
                         break;
-                    case 1:  case 2: case 3:
+                    case 1: case 2: case 3:
                         menu = menus.get(selectMenu - 1);
+                        break;
+                    default:
+                        throw new InputMismatchException("존재하지 않는 메뉴입니다.");
                 }
 
                 if (run) {
@@ -41,23 +41,23 @@ public class Kiosk {
 
                     int selectMenuItem = sc.nextInt();
                     int menuIndex = selectMenuItem - 1;
+
+                    if (selectMenuItem > menu.getMenuItems().size()) throw new IndexOutOfBoundsException("존재하지 않는 메뉴입니다.");
+
                     switch (selectMenuItem) {
                         case 0:
                             continue;
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
+                        case 1: case 2: case 3: case 4:
                             System.out.print("선택한 메뉴 : ");
                             System.out.println(menu.getMenuItems().get(menuIndex).getName() + " | W "
                                     + menu.getMenuItems().get(menuIndex).getPrice()
                                     + " | " + menu.getMenuItems().get(menuIndex).getDescription());
                             break;
                         default:
-                            throw new InputMismatchException("존재하지 않는 메뉴입니다.");
+                            throw new IndexOutOfBoundsException("존재하지 않는 메뉴입니다.");
                     }
                 }
-            } catch (InputMismatchException e) {
+            } catch (IndexOutOfBoundsException e) {
                 System.out.println("존재하지 않는 메뉴입니다.");
             }
         }
