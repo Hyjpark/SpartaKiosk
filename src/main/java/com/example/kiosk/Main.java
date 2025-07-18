@@ -17,7 +17,10 @@ public class Main {
                 new MenuItem("Hamburger", "5.4", "비프패티를 기반으로 야채가 들어간 기본버거")
         ));
 
-        Menu drinks = new Menu("Drinks", List.of());
+        Menu drinks = new Menu("Drinks", List.of(
+                new MenuItem("Coke", "4.0", "탄산이 톡톡쏘는 콜라"),
+                new MenuItem("VanillaShake", "5.3", "바닐라닐라 쉐이크")
+        ));
         Menu desserts = new Menu("Desserts", List.of());
 
         menus.add(burger);
