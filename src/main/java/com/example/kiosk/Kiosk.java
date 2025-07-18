@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Kiosk {
-    List<Menu> menus = new ArrayList<>();
+    private List<Menu> menus = new ArrayList<>();
 
     Kiosk(List<Menu> menuList) {
         this.menus = menuList;
@@ -49,9 +49,9 @@ public class Kiosk {
                         case 3:
                         case 4:
                             System.out.print("선택한 메뉴 : ");
-                            System.out.println(menu.getMenuItems().get(menuIndex).name + " | W "
-                                    + menu.getMenuItems().get(menuIndex).price
-                                    + " | " + menu.getMenuItems().get(menuIndex).description);
+                            System.out.println(menu.getMenuItems().get(menuIndex).getName() + " | W "
+                                    + menu.getMenuItems().get(menuIndex).getPrice()
+                                    + " | " + menu.getMenuItems().get(menuIndex).getDescription());
                             break;
                         default:
                             throw new InputMismatchException("존재하지 않는 메뉴입니다.");
