@@ -2,6 +2,7 @@ package com.example.kiosk;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 // MenuItem 클래스를 관리
 public class Menu {
@@ -15,7 +16,7 @@ public class Menu {
 
     public void showMenuItem() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n[ SHAKESHACK MENU ]\n");
+        sb.append("\n[ "+ category.toUpperCase() + " MENU ]\n");
         for (int  i = 0; i < menuItems.size(); i++) {
             int blankLength = 12;
             sb.append((i + 1) + ". " );
