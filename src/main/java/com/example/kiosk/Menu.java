@@ -2,12 +2,11 @@ package com.example.kiosk;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 // MenuItem 클래스를 관리
 public class Menu {
-    private String category;
-    private List<MenuItem> menuItems = new ArrayList<>();
+    private final String category;
+    private final List<MenuItem> menuItems;
 
     public Menu(String category, List<MenuItem> menuItems) {
         this.category = category;
@@ -37,9 +36,5 @@ public class Menu {
 
     public String getCategory() {
         return this.category;
-    }
-
-    public void setMenuItems(List<MenuItem> menuItems) {
-        this.menuItems = menuItems;
     }
 }

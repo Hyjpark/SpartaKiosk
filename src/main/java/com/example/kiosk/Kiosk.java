@@ -3,7 +3,7 @@ package com.example.kiosk;
 import java.util.*;
 
 public class Kiosk {
-    private List<Menu> menus =  new ArrayList<>();
+    private final List<Menu> menus;
 
     public Kiosk(List<Menu> menuList) {
         this.menus = menuList;
