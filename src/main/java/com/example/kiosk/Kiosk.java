@@ -21,7 +21,7 @@ public class Kiosk {
                 }
                 System.out.println("0. 종료 \t| 종료");
 
-                int selectMenu = sc.nextInt();
+                int selectMenu = Integer.parseInt(sc.nextLine());
                 Menu menu = null;
 
                 if (selectMenu == 0) {
@@ -37,7 +37,7 @@ public class Kiosk {
                     // 메뉴 출력
                     menu.showMenuItem();
 
-                    int selectMenuItem = sc.nextInt();
+                    int selectMenuItem = Integer.parseInt(sc.nextLine());
                     int menuIndex = selectMenuItem - 1;
 
                     if (selectMenuItem == 0) continue;
@@ -52,7 +52,7 @@ public class Kiosk {
                 }
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("존재하지 않는 메뉴입니다.");
-            } catch (InputMismatchException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("잘못된 입력입니다.");
             }
         }
