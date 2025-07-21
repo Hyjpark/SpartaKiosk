@@ -22,7 +22,6 @@ public class Kiosk {
                 System.out.println("0. 종료 \t| 종료");
 
                 int selectMenu = Integer.parseInt(sc.nextLine());
-                Menu menu = null;
 
                 if (selectMenu == 0) {
                     System.out.println("프로그램을 종료합니다.");
@@ -31,7 +30,7 @@ public class Kiosk {
 
                 if (selectMenu > menus.size()) throw new IndexOutOfBoundsException("존재하지 않는 메뉴입니다.");
 
-                menu = menus.get(selectMenu - 1);
+                Menu menu = menus.get(selectMenu - 1);
 
                 // 메뉴 출력
                 menu.showMenuItem();

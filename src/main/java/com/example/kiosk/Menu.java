@@ -1,6 +1,5 @@
 package com.example.kiosk;
 
-import java.util.ArrayList;
 import java.util.List;
 
 // MenuItem 클래스를 관리
