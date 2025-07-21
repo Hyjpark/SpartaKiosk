@@ -47,4 +47,10 @@ public class Cart {
 
         return sum;
     }
+
+    public void order() {
+        // 총 금액을 계산하고 장바구니를 초기화 한다.
+        System.out.println("\n주문이 완료되었습니다. 금액은 W " + sumPrice() + "입니다.");
+        cartList.clear();
+    }
 }

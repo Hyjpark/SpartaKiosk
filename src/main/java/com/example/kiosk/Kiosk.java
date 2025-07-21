@@ -95,7 +95,7 @@ public class Kiosk {
     public void handleCartMenu(int inputNumber) {
         switch (inputNumber) {
             case 1 :
-                System.out.println("주문");
+                cart.order();
                 break;
             case 2 :
                 System.out.println("메뉴판");
