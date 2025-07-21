@@ -1,27 +1,27 @@
 package com.example.kiosk;
 
-import java.util.ArrayList;
 import java.util.List;
 
 // MenuItem 클래스를 관리
 public class Menu {
-    String category;
-    List<MenuItem> menuItems = new ArrayList<>();
+    private final String category;
+    private final List<MenuItem> menuItems;
 
-    Menu(String category) {
+    public Menu(String category, List<MenuItem> menuItems) {
         this.category = category;
+        this.menuItems = menuItems;
     }
 
     public void showMenuItem() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n[ SHAKESHACK MENU ]\n");
+        sb.append("\n[ "+ category.toUpperCase() + " MENU ]\n");
         for (int  i = 0; i < menuItems.size(); i++) {
             int blankLength = 12;
             sb.append((i + 1) + ". " );
-            sb.append(menuItems.get(i).name);
-            sb.append(" ".repeat(blankLength - menuItems.get(i).name.length()) +  " | "); // 이름과 가격 사이의 공백 생성
-            sb.append("W " + menuItems.get(i).price +  " | ");
-            sb.append(menuItems.get(i).description);
+            sb.append(menuItems.get(i).getName());
+            sb.append(" ".repeat(blankLength - menuItems.get(i).getName().length()) +  " | "); // 이름과 가격 사이의 공백 생성
+            sb.append("W " + menuItems.get(i).getPrice() +  " | ");
+            sb.append(menuItems.get(i).getDescription());
             sb.append("\n");
         }
         sb.append("0. 뒤로가기");// 메뉴 출력

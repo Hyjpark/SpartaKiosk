@@ -1,21 +1,18 @@
 package com.example.kiosk;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Kiosk {
-    List<Menu> menus = new ArrayList<>();
+    private final List<Menu> menus;
 
-    Kiosk(List<Menu> menuList) {
+    public Kiosk(List<Menu> menuList) {
         this.menus = menuList;
     }
 
     public void start() {
         Scanner sc =  new Scanner(System.in);
-        boolean run = true;
-        while (run) {
+
+        while (true) {
             try {
                 // 상위 카테고리 메뉴 출력
                 System.out.println("\n[ MAIN MENU ]");
@@ -24,41 +21,37 @@ public class Kiosk {
                 }
                 System.out.println("0. 종료 \t| 종료");
 
-                int selectMenu = sc.nextInt();
-                Menu menu = null;
-                switch (selectMenu) {
-                    case 0:
-                        System.out.println("프로그램을 종료합니다.");
-                        run = false;
-                        break;
-                    case 1:  case 2: case 3:
-                        menu = menus.get(selectMenu - 1);
+                int selectMenu = Integer.parseInt(sc.nextLine());
+
+                if (selectMenu == 0) {
+                    System.out.println("프로그램을 종료합니다.");
+                    break;
                 }
 
-                if (run) {
-                    // 메뉴 출력
-                    menu.showMenuItem();
+                if (selectMenu > menus.size()) throw new IndexOutOfBoundsException("존재하지 않는 메뉴입니다.");
 
-                    int selectMenuItem = sc.nextInt();
-                    int menuIndex = selectMenuItem - 1;
-                    switch (selectMenuItem) {
-                        case 0:
-                            continue;
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                            System.out.print("선택한 메뉴 : ");
-                            System.out.println(menu.getMenuItems().get(menuIndex).name + " | W "
-                                    + menu.getMenuItems().get(menuIndex).price
-                                    + " | " + menu.getMenuItems().get(menuIndex).description);
-                            break;
-                        default:
-                            throw new InputMismatchException("존재하지 않는 메뉴입니다.");
-                    }
-                }
-            } catch (InputMismatchException e) {
+                Menu menu = menus.get(selectMenu - 1);
+
+                // 메뉴 출력
+                menu.showMenuItem();
+
+                int selectMenuItem = Integer.parseInt(sc.nextLine());
+                int menuIndex = selectMenuItem - 1;
+
+                if (selectMenuItem == 0) continue;
+
+                if (selectMenuItem > menu.getMenuItems().size()) throw new IndexOutOfBoundsException("존재하지 않는 메뉴입니다.");
+
+                System.out.print("선택한 메뉴 : ");
+                System.out.println(menu.getMenuItems().get(menuIndex).getName() + " | W "
+                        + menu.getMenuItems().get(menuIndex).getPrice()
+                        + " | " + menu.getMenuItems().get(menuIndex).getDescription());
+
+
+            } catch (IndexOutOfBoundsException e) {
                 System.out.println("존재하지 않는 메뉴입니다.");
+            } catch (NumberFormatException e) {
+                System.out.println("잘못된 입력입니다.");
             }
         }
     }
