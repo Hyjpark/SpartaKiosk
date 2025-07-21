@@ -40,8 +40,8 @@ public class Kiosk {
                 if (isOrderMenu) {
                     switch (selectMenu) {
                         case 4 :
-                            System.out.println("아래와 같이 주문 하시겠습니까?");
-                            cart.showCartList();
+                            System.out.println("\n아래와 같이 주문 하시겠습니까?");
+                            cart.showCart();
                             break;
                         case 5 :
                             System.out.println("주문을 취소합니다.");
