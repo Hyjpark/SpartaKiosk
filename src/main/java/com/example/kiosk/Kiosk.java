@@ -5,6 +5,7 @@ import java.util.*;
 public class Kiosk {
     private final List<Menu> menus;
     private final Cart cart = new Cart();
+    private final OrderMenu orderMenu = new OrderMenu();
 
     public Kiosk(List<Menu> menuList) {
         this.menus = menuList;
@@ -22,6 +23,10 @@ public class Kiosk {
                 }
                 System.out.println("0. 종료 \t| 종료");
 
+                // 장바구니에 물건이 들어있으면 [ ORDER MENU ] 출력
+                boolean isOrderMenu = cart.getCartList().size() > 0;
+                if (isOrderMenu) orderMenu.printOrderMenu();
+
                 int selectMenu = Integer.parseInt(sc.nextLine());
 
                 if (selectMenu == 0) {
@@ -29,7 +34,20 @@ public class Kiosk {
                     break;
                 }
 
-                if (selectMenu > menus.size()) throw new IndexOutOfBoundsException("존재하지 않는 메뉴입니다.");
+                int maxMenuNumber = isOrderMenu ? menus.size() + 2 : menus.size();
+                if (selectMenu > maxMenuNumber) throw new IndexOutOfBoundsException("존재하지 않는 메뉴입니다.");
+
+                if (isOrderMenu) {
+                    switch (selectMenu) {
+                        case 4 :
+                            System.out.println("아래와 같이 주문 하시겠습니까?");
+                            cart.showCartList();
+                            break;
+                        case 5 :
+                            System.out.println("주문을 취소합니다.");
+                            continue;
+                    }
+                }
 
                 Menu menu = menus.get(selectMenu - 1);
 
