@@ -42,7 +42,8 @@ public class Kiosk {
                         case 4 :
                             System.out.println("\n아래와 같이 주문 하시겠습니까?");
                             cart.showCart();
-                            break;
+                            handleCartMenu(Integer.parseInt(sc.nextLine()));
+                            continue;
                         case 5 :
                             System.out.println("주문을 취소합니다.");
                             continue;
@@ -88,6 +89,19 @@ public class Kiosk {
             } catch (IllegalArgumentException e) {
                 System.out.println("유효하지 않은 메뉴입니다.");
             }
+        }
+    }
+
+    public void handleCartMenu(int inputNumber) {
+        switch (inputNumber) {
+            case 1 :
+                System.out.println("주문");
+                break;
+            case 2 :
+                System.out.println("메뉴판");
+                return;
+            default:
+                throw new IllegalArgumentException("유효하지 않은 메뉴입니다.");
         }
     }
 }
