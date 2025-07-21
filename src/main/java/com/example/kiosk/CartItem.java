@@ -1,5 +1,7 @@
 package com.example.kiosk;
 
+import java.math.BigDecimal;
+
 public class CartItem {
     private final MenuItem item;
 
@@ -11,7 +13,7 @@ public class CartItem {
         return this.item.getName();
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return this.item.getPrice();
     }
 
