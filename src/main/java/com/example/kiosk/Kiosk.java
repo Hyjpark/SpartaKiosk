@@ -7,7 +7,6 @@ public class Kiosk {
     private final Cart cart = new Cart();
     private final OrderMenu orderMenu = new OrderMenu();
     private final DiscountMenuView discountMenuView = new DiscountMenuView();
-    private final DiscountService  discountService = new DiscountService();
 
     private final Scanner sc = new Scanner(System.in);
 
@@ -113,9 +112,9 @@ public class Kiosk {
 
         int selected = Integer.parseInt(sc.nextLine());
 
-        DiscountRate discountRate = discountService.findDiscountRateBySelection(selected);
+        DiscountRate discountRate = DiscountRate.fromSelection(selected);
 
-        cart.applyDiscount(discountRate);
+        System.out.println("주문이 완료되었습니다. 금액은 W " + cart.applyDiscount(discountRate) + "입니다.");
 
         cart.order();
     }

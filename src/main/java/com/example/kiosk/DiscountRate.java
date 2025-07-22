@@ -2,7 +2,7 @@ package com.example.kiosk;
 
 import java.math.BigDecimal;
 
-public enum DiscountRate {
+public enum DiscountRate implements DiscountPolicy {
     // 국자유공자 10% 군인 5% 학생 3% 일반 0%
     VETERAN("국가유공자", new BigDecimal("0.1")),
     SOLDIER("군인", new BigDecimal("0.05")),
@@ -31,4 +31,16 @@ public enum DiscountRate {
         return discount.setScale(0, BigDecimal.ROUND_DOWN).toString();
     }
 
+    public static DiscountRate fromSelection(int selected) {
+        DiscountRate[] retes = DiscountRate.values();
+        if (selected < 1 || selected > retes.length) {
+            throw new IllegalArgumentException("유효하지 않은 메뉴입니다.");
+        }
+        return retes[selected - 1];
+    }
+
+    @Override
+    public BigDecimal applyDiscount(BigDecimal total) {
+        return total.subtract(total.multiply(discountRate));
+    }
 }
