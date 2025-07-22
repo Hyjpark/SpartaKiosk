@@ -1,6 +1,7 @@
 package com.example.kiosk;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 // MenuItem 클래스를 관리
 public class Menu {
@@ -14,19 +15,20 @@ public class Menu {
 
     public void showMenuItem() {
         StringBuilder sb = new StringBuilder();
+        int blankLength = 12;
+
         sb.append("\n[ "+ category.toUpperCase() + " MENU ]\n");
-        for (int  i = 0; i < menuItems.size(); i++) {
-            int blankLength = 12;
-            sb.append((i + 1) + ". " );
+        IntStream.range(0, menuItems.size()).forEach(i -> {
+            sb.append((i + 1) + ". ");
             sb.append(menuItems.get(i).getName());
             sb.append(" ".repeat(blankLength - menuItems.get(i).getName().length()) +  " | "); // 이름과 가격 사이의 공백 생성
             sb.append("W " + menuItems.get(i).getPrice() +  " | ");
             sb.append(menuItems.get(i).getDescription());
             sb.append("\n");
-        }
+        });
         sb.append("0. 뒤로가기");// 메뉴 출력
 
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 
     public List<MenuItem> getMenuItems() {
