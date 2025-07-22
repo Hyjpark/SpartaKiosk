@@ -98,7 +98,7 @@ public class Kiosk {
                 cart.order();
                 break;
             case 2 :
-                System.out.println("메뉴판");
+                System.out.println("메뉴판으로 돌아갑니다.");
                 return;
             default:
                 throw new IllegalArgumentException("유효하지 않은 메뉴입니다.");
