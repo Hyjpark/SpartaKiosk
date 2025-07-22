@@ -8,8 +8,13 @@ public class Cart {
     private final List<CartItem> cartList = new ArrayList();
 
     public void addCartList(MenuItem menuItem) {
+        filterCartList(menuItem);
         cartList.add(new CartItem(menuItem));
         System.out.println(menuItem.getName() + "가 장바구니에 추가되었습니다.");
+    }
+
+    public void filterCartList(MenuItem menuItem) {
+        cartList.removeIf(cartItem -> cartItem.getName().equals(menuItem.getName()));
     }
 
     public List<CartItem> getCartList() {
