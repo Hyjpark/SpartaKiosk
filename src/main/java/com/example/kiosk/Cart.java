@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Cart {
     private final List<CartItem> cartList = new ArrayList();
+    private final DiscountService discountService = new DiscountService();
 
     public void addCartList(MenuItem menuItem) {
         cartList.add(new CartItem(menuItem));
@@ -50,7 +51,14 @@ public class Cart {
 
     public void order() {
         // 총 금액을 계산하고 장바구니를 초기화 한다.
-        System.out.println("\n주문이 완료되었습니다. 금액은 W " + sumPrice() + "입니다.");
+        System.out.println("주문이 완료되었습니다. 금액은 W " + discountService.getDiscountAmount() + "입니다.");
         cartList.clear();
+    }
+
+    public void applyDiscount(DiscountRate discountRate) {
+        BigDecimal discount = discountRate.getDiscountRate();
+        BigDecimal total =  sumPrice();
+
+        discountService.calculateDiscountAmount(total, discount);
     }
 }

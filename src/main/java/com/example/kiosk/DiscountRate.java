@@ -21,13 +21,14 @@ public enum DiscountRate {
         return userType;
     }
 
-    public static DiscountRate fromUserType(String userType) {
-        for (DiscountRate discountRate : values()) {
-            if (discountRate.getUserType().equals(userType)) {
-                return discountRate;
-            }
-        }
-        throw new IllegalArgumentException("유효하지 않는 메뉴입니다.");
+    public BigDecimal getDiscountRate() {
+        return discountRate;
+    }
+
+    public String getPercent() {
+        BigDecimal multiplier = new BigDecimal("100");
+        BigDecimal discount = discountRate.multiply(multiplier);
+        return discount.setScale(0, BigDecimal.ROUND_DOWN).toString();
     }
 
 }
