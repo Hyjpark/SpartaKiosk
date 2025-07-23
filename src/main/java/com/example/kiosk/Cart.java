@@ -21,25 +21,22 @@ public class Cart {
         return !cartList.isEmpty();
     }
 
-    public void showCart() {
-        showCartList();
-        showTotalPrice();
-        System.out.println("\n1. 주문\t\t2. 메뉴판");
-    }
-
-    public void showCartList() {
-        System.out.println("\n[ Orders ]");
-        for (int  i = 0; i < cartList.size(); i++) {
-            System.out.println(
-                    cartList.get(i).getName() + " | W "
-                    + cartList.get(i).getPrice()  + " | "
-                    + cartList.get(i).getDescription());
+    public String renderCartList() {
+        StringBuilder sb = new StringBuilder("\n[ Orders ]\n");
+        for (CartItem cartItem : cartList) {
+            sb.append(cartItem.getName() + " | W ")
+                .append(cartItem.getPrice()  + " | ")
+                .append(cartItem.getDescription())
+                .append("\n");
         }
+        return sb.toString();
     }
 
-    public void showTotalPrice() {
-        System.out.println("\n[ Total ]");
-        System.out.println("W " + sumPrice());
+    public String renderTotalPrice() {
+        String totalPrice = "[ Total ]\n";
+        totalPrice += "W " + sumPrice() + "\n";
+
+        return totalPrice;
     }
 
     private BigDecimal sumPrice() {

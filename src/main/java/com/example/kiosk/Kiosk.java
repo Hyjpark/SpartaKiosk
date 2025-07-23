@@ -75,7 +75,9 @@ public class Kiosk {
 
         if (selectMenu == ordersIndex) {
             System.out.println("\n아래와 같이 주문 하시겠습니까?");
-            cart.showCart();
+            System.out.println(cart.renderCartList());
+            System.out.println(cart.renderTotalPrice());
+            System.out.println("1. 주문\t\t2. 메뉴판");
             return handleCartMenu(readInput());
         }
 
