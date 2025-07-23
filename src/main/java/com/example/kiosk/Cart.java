@@ -4,17 +4,17 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cart {
-    private final List<CartItem> cartList = new ArrayList();
+public class Cart<T extends ItemDetails> {
+    private final List<CartItem<T>> cartList = new ArrayList();
 
-    public void addCartList(MenuItem menuItem) {
-        filterCartList(menuItem);
-        cartList.add(new CartItem(menuItem));
-        System.out.println(menuItem.getName() + "가 장바구니에 추가되었습니다.");
+    public void addCartList(T cartItem) {
+        filterCartList(cartItem);
+        cartList.add(new CartItem<>(cartItem));
+        System.out.println(cartItem.getName() + "가 장바구니에 추가되었습니다.");
     }
 
-    public void filterCartList(MenuItem menuItem) {
-        cartList.removeIf(cartItem -> cartItem.getName().equals(menuItem.getName()));
+    public void filterCartList(T cartItem) {
+        cartList.removeIf(item -> item.getName().equals(cartItem.getName()));
     }
 
     public boolean hasItems() {

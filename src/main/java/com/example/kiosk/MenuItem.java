@@ -3,7 +3,7 @@ package com.example.kiosk;
 import java.math.BigDecimal;
 
 // 개별 음식 항목을 관리하는 클래스
-public class MenuItem {
+public class MenuItem implements ItemDetails {
     private final String name;
     private final BigDecimal price;
     private final String description;

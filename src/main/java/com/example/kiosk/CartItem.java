@@ -2,22 +2,22 @@ package com.example.kiosk;
 
 import java.math.BigDecimal;
 
-public class CartItem {
-    private final MenuItem item;
+public class CartItem<T extends ItemDetails> {
+    private final T item;
 
-    public CartItem(MenuItem item) {
+    public CartItem(T item) {
         this.item = item;
     }
 
     public String getName() {
-        return this.item.getName();
+        return item.getName();
     }
 
     public BigDecimal getPrice() {
-        return this.item.getPrice();
+        return item.getPrice();
     }
 
     public String getDescription() {
-        return this.item.getDescription();
+        return item.getDescription();
     }
 }
