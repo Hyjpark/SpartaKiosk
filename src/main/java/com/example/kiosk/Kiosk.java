@@ -90,7 +90,7 @@ public class Kiosk {
     private void handleMenuSelection(int selectMenu) {
         Menu menu = menus.get(selectMenu - 1);
         // 메뉴 출력
-        menu.showMenuItem();
+        System.out.println(menu.renderMenuItems());
 
         int selectMenuItem = readInput();
 

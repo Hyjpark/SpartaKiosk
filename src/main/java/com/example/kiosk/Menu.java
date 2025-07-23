@@ -13,7 +13,7 @@ public class Menu {
         this.menuItems = menuItems;
     }
 
-    public void showMenuItem() {
+    public String renderMenuItems() {
         StringBuilder sb = new StringBuilder();
         int blankLength = 12;
 
@@ -28,7 +28,7 @@ public class Menu {
         });
         sb.append("0. 뒤로가기");// 메뉴 출력
 
-        System.out.println(sb);
+        return sb.toString();
     }
 
     public List<MenuItem> getMenuItems() {
