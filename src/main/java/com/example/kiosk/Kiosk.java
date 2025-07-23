@@ -98,21 +98,21 @@ public class Kiosk {
     }
 
     private ActionResult handleMenuDetail(Menu menu, int selectMenuItem) {
-        int menuIndex = selectMenuItem - 1;
-
         if (selectMenuItem == 0) return ActionResult.RETURN_TO_MENU;
-
         if (selectMenuItem > menu.getMenuItems().size()) throw new IndexOutOfBoundsException("존재하지 않는 메뉴입니다.");
 
-        String selectShowMenuItem = menu.getMenuItems().get(menuIndex).getName() + " | W "
-                + menu.getMenuItems().get(menuIndex).getPrice()
-                + " | " + menu.getMenuItems().get(menuIndex).getDescription();
-        System.out.print("선택한 메뉴 : ");
-        System.out.println(selectShowMenuItem);
+        int menuIndex = selectMenuItem - 1;
+
+        MenuItem selectItem = menu.getMenuItems().get(menuIndex);
+        String selectShowMenuItem = String.format("%s | W %s | %s",
+                selectItem.getName(),
+                selectItem.getPrice(),
+                selectItem.getDescription());
 
         System.out.println("\n\"" + selectShowMenuItem  + "\"");
         System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
         System.out.println("1. 확인 \t 2. 취소");
+
         switch (readInput()) {
             case 1 :
                 cart.addCartList(menu.getMenuItems().get(menuIndex));
@@ -143,10 +143,7 @@ public class Kiosk {
     private void selectDiscountAndOrder() {
         System.out.println(discountMenuView.format());
 
-        int selected = readInput();
-
-        DiscountRate discountRate = DiscountRate.fromSelection(selected);
-
+        DiscountRate discountRate = DiscountRate.fromSelection(readInput());
         System.out.println("주문이 완료되었습니다. 금액은 W " + cart.applyDiscount(discountRate) + "입니다.");
 
         cart.order();
