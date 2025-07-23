@@ -17,8 +17,8 @@ public class Cart {
         cartList.removeIf(cartItem -> cartItem.getName().equals(menuItem.getName()));
     }
 
-    public List<CartItem> getCartList() {
-        return cartList;
+    public boolean hasItems() {
+        return !cartList.isEmpty();
     }
 
     public void showCart() {
