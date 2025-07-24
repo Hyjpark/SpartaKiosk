@@ -4,39 +4,77 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cart {
-    private final List<CartItem> cartList = new ArrayList();
+/**
+ * 장바구니 역할을 담당하는 클래스 입니다.
+ *
+ * @param <T> {@link ItemDetails}를 구현한 장바구니 항목 타입
+ */
+public class Cart<T extends ItemDetails> {
+    private final List<CartItem<T>> cartList = new ArrayList();
 
-    public void addCartList(MenuItem menuItem) {
-        cartList.add(new CartItem(menuItem));
-        System.out.println(menuItem.getName() + "가 장바구니에 추가되었습니다.");
+    /**
+     * 장바구니에 항목을 추가합니다.
+     * 동일한 항목이 있으면 기존 항목을 제거한 후 추가합니다.
+     *
+     * @param cartItem 장바구니에 추가할 항목
+     */
+    public void addCartList(T cartItem) {
+        filterCartList(cartItem);
+        cartList.add(new CartItem<>(cartItem));
+        System.out.println(cartItem.getName() + "가 장바구니에 추가되었습니다.");
     }
 
-    public List<CartItem> getCartList() {
-        return cartList;
+    /**
+     * 장바구니에서 동일한 이름으이 항목을 제거합니다.
+     *
+     * @param cartItem 중복 확인할 항목
+     */
+    public void filterCartList(T cartItem) {
+        cartList.removeIf(item -> item.getName().equals(cartItem.getName()));
     }
 
-    public void showCart() {
-        showCartList();
-        showTotalPrice();
-        System.out.println("\n1. 주문\t\t2. 메뉴판");
+    /**
+     * 장바구니에 항목이 존재하는지 여부를 반환합니다.
+     *
+     * @return 장바구니가 비어있으면 {@code false}, 그렇지 않으면 {@code true}
+     */
+    public boolean hasItems() {
+        return !cartList.isEmpty();
     }
 
-    public void showCartList() {
-        System.out.println("\n[ Orders ]");
-        for (int  i = 0; i < cartList.size(); i++) {
-            System.out.println(
-                    cartList.get(i).getName() + " | W "
-                    + cartList.get(i).getPrice()  + " | "
-                    + cartList.get(i).getDescription());
+    /**
+     * 장바구니에 담긴 항목들을 문자열로 반환합니다.
+     *
+     * @return 장바구니 항목 목록 문자열
+     */
+    public String renderCartList() {
+        StringBuilder sb = new StringBuilder("\n[ Orders ]\n");
+        for (CartItem cartItem : cartList) {
+            sb.append(cartItem.getName() + " | W ")
+                .append(cartItem.getPrice()  + " | ")
+                .append(cartItem.getDescription())
+                .append("\n");
         }
+        return sb.toString();
     }
 
-    public void showTotalPrice() {
-        System.out.println("\n[ Total ]");
-        System.out.println("W " + sumPrice());
+    /**
+     * 장바구니 항목들의 총합 금액 문자열을 반환합니다.
+     *
+     * @return 총 금액을 포함한 문자열
+     */
+    public String renderTotalPrice() {
+        String totalPrice = "[ Total ]\n";
+        totalPrice += "W " + sumPrice() + "\n";
+        
+        return totalPrice;
     }
 
+    /**
+     * 장바구니 항목들의 총합 금액을 계산합니다.
+     *
+     * @return 총 금액
+     */
     private BigDecimal sumPrice() {
         BigDecimal sum = BigDecimal.ZERO;
 
@@ -48,9 +86,24 @@ public class Cart {
         return sum;
     }
 
+    /**
+     * 주문을 완료하고 장바구니를 초기화합니다.
+     */
     public void order() {
-        // 총 금액을 계산하고 장바구니를 초기화 한다.
-        System.out.println("\n주문이 완료되었습니다. 금액은 W " + sumPrice() + "입니다.");
+        // 장바구니를 초기화 한다.
         cartList.clear();
+    }
+
+    /**
+     * 주어진 할인 정책을 적용한 최종 금액을 반환합니다.
+     * 
+     * @param discountPolicy 적용할 할인 정책
+     * @return 할인 적용 후 금액
+     */
+    public BigDecimal applyDiscount(DiscountPolicy discountPolicy) {
+        // 최종 금액을 계산한다.
+        BigDecimal total = sumPrice();
+
+        return discountPolicy.applyDiscount(total); // 할인 적용한 금액을 반환한다.
     }
 }
